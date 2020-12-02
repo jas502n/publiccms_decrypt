@@ -7,6 +7,40 @@ https://github.com/sanluan/PublicCMS
 
 `publiccms-common-V4.0.202004.a.jar!/com/publiccms/common/tools/VerificationUtils.class`
 
+
+#### 
+
+`com.publiccms.common.tools.VerificationUtils`
+
+`com.publiccms.common.servlet.InstallServlet`
+
+```
+private void configDatabase(HttpServletRequest request, Map<String, Object> map) {
+    try {
+      Properties dbconfig = PropertiesLoaderUtils.loadAllProperties("config/database-template.properties");
+      String host = request.getParameter("host");
+      String port = request.getParameter("port");
+      String database = request.getParameter("database");
+      String timeZone = request.getParameter("timeZone");
+      this.cmsUpgrader.setDataBaseUrl(dbconfig, host, port, database, timeZone);
+      dbconfig.setProperty("jdbc.username", request.getParameter("username"));
+      dbconfig.setProperty("jdbc.encryptPassword", 
+          VerificationUtils.base64Encode(VerificationUtils.encrypt(request.getParameter("password"), "publiccms")));
+      String databaseConfiFile = CommonConstants.CMS_FILEPATH + "/database.properties";
+      File file = new File(databaseConfiFile);
+      try (FileOutputStream outputStream = new FileOutputStream(file)) {
+        dbconfig.store(outputStream, (String)null);
+      } 
+      try (Connection connection = DatabaseUtils.getConnection(databaseConfiFile)) {
+        map.put("usersql", Boolean.valueOf((new File(CommonConstants.CMS_FILEPATH + "/publiccms.sql")).exists()));
+        map.put("message", "success");
+      } 
+    } catch (Exception e) {
+      map.put("error", e.getMessage());
+    } 
+  }
+```
+
 **默认加密秘钥**
 
 ```
