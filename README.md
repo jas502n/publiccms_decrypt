@@ -10,6 +10,22 @@
 public static final String ENCRYPT_KEY = "publiccms";
 ```
 
+## 数据库配置文件位置
+
+`./publiccms/WEB-INF/classes/config/database-template.properties`
+
+`./publiccms/WEB-INF/classes/config/database.properties`
+
+`/webapps/ROOT/publiccms/data/database.properties`
+
+```
+jdbc.url=jdbc:mysql://192.168.240.21:3306/cms?characterEncoding=UTF-8&useSSL=false&useAffectedRows=true&serverTimezone=GMT%2B08
+hikariCP.idleTimeout=25000
+jdbc.driverClassName=com.mysql.cj.jdbc.Driver
+jdbc.username=root
+jdbc.encryptPassword= 9xgiKaPSBm9y76PsUC+0Ig==
+```
+
 
 ## java DESede
 
