@@ -2,12 +2,16 @@
 
 `publiccms-core-V4.0.202004.a.jar!/com/publiccms/common/constants/CommonConstants.class`
 
+`publiccms-common-V4.0.202004.a.jar!/com/publiccms/common/tools/VerificationUtils.class`
+
+**默认加密秘钥**
 
 ```
 public static final String ENCRYPT_KEY = "publiccms";
 ```
 
-## 
+
+## java DESede
 
 ```
 
@@ -59,7 +63,7 @@ public class Main {
 
 ```
 
-输出
+java console 输出
 ```
 [+] Please input your PublicCMS password:
 [+] Example= 9xgiKaPSBm9y76PsUC+0Ig==
@@ -67,13 +71,15 @@ public class Main {
 [+] Decrypt_Password= p@ssw0rd
 ```
 
-## 使用python解密
+## 使用python解密 Desede
 
 https://stackoverflow.com/questions/21982389/desede-in-java-and-3des-in-python
 
 默认秘钥为 **`publiccms`** 经过sha1 加密为 `2435e960d9be985705455019cfd3bc84c39344db`
 
 然后取**前24位** **`"2435e960d9be985705455019cfd3bc84c39344db"[0:24]`**
+
+对应python脚本：
 
 ```
 from pyDes import *
@@ -105,7 +111,7 @@ print("[+] EncryptData= " + data)
 print("[+] PlainText= " + publiccms_decrypt(data, key))
 ```
 
-## demo
+## python 解密 demo
 ```
 python3 publicms_decrypt.py
 
